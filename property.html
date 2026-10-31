@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جزئیات ملک | کیانی املاک</title>
+<meta name="description" content="جزئیات کامل ملک: گالری تصاویر، مشخصات، امکانات، توضیحات و درخواست بازدید.">
+<meta name="theme-color" content="#ff5a45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="header is-solid">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="کیانی املاک">
+      <span class="brand__mark">K</span>
+      <span class="brand__text">
+        <span class="brand__name">کیانی املاک</span>
+        <span class="brand__tag">ANTALYA · ALANYA</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="منوی اصلی">
+      <a class="nav__link" href="index.html">خانه</a>
+      <a class="nav__link is-active" href="properties.html">املاک</a>
+      <a class="nav__link" href="index.html#about">درباره من</a>
+      <a class="nav__link" href="index.html#process">فرایند همکاری</a>
+      <a class="nav__link" href="index.html#contact">تماس</a>
+      <a class="nav__link" href="admin.html">پنل مدیریت</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+905520000000">+90 552 000 00 00</a>
+      <a class="btn btn--primary btn--sm" href="#lead">هماهنگی بازدید</a>
+      <button class="burger" type="button" aria-label="باز کردن منو"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <div class="mobile-nav__top">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">K</span>
+      <span class="brand__text"><span class="brand__name" style="color:#fff">کیانی املاک</span></span>
+    </a>
+    <button class="mobile-nav__close" type="button" aria-label="بستن منو">×</button>
+  </div>
+  <nav class="mobile-nav__links">
+    <a href="index.html">خانه <span>01</span></a>
+    <a href="properties.html">املاک <span>02</span></a>
+    <a href="index.html#about">درباره من <span>03</span></a>
+    <a href="index.html#process">فرایند همکاری <span>04</span></a>
+    <a href="admin.html">پنل مدیریت <span>05</span></a>
+  </nav>
+  <div class="mobile-nav__foot">
+    <a class="btn btn--primary btn--block" href="#lead">درخواست بازدید</a>
+    <a class="btn btn--light btn--block" href="tel:+905520000000">تماس مستقیم</a>
+  </div>
+</div>
+
+<main>
+  <section class="page-hero" style="padding-bottom:44px">
+    <div class="page-hero__bg">
+      <img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=1800&q=80" alt="" width="1800" height="1200">
+    </div>
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="properties.html">املاک</a></li>
+        <li id="crumb-prop">جزئیات ملک</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="detail">
+    <div class="container">
+      <!-- gallery -->
+      <div class="gallery">
+        <div class="gallery__main" id="gallery-main">
+          <img id="gallery-main-img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80" alt="تصویر اصلی ملک" width="1600" height="1000">
+          <button class="gallery__nav gallery__nav--prev" id="gallery-prev" type="button" aria-label="تصویر قبلی">›</button>
+          <button class="gallery__nav gallery__nav--next" id="gallery-next" type="button" aria-label="تصویر بعدی">‹</button>
+          <span class="gallery__count" id="gallery-count">1 / 5</span>
+        </div>
+        <div class="gallery__thumbs" id="gallery-thumbs"><!-- injected --></div>
+      </div>
+
+      <!-- head -->
+      <div class="detail__head">
+        <div>
+          <div class="prop-card__badges" style="position:static">
+            <span class="pill pill--coral" id="d-type">ویلا</span>
+            <span class="pill" id="d-badge">پیشنهاد ویژه</span>
+          </div>
+          <h1 id="d-title">عنوان ملک</h1>
+          <p class="detail__loc" id="d-loc">—</p>
+        </div>
+        <div class="detail__price">
+          <div class="price" id="d-price">$0</div>
+          <small class="muted">قیمت کل · قابل مذاکره</small>
+          <a class="btn btn--primary" href="#lead">درخواست بازدید</a>
+        </div>
+      </div>
+
+      <!-- specs -->
+      <div class="specs" id="d-specs"><!-- injected --></div>
+
+      <!-- body -->
+      <div class="detail__body">
+        <div>
+          <div class="block">
+            <h2 class="block__title">درباره این ملک</h2>
+            <div class="prose" id="d-desc"><!-- injected --></div>
+          </div>
+
+          <div class="block">
+            <h2 class="block__title">امکانات و ویژگی‌ها</h2>
+            <ul class="features" id="d-features"><!-- injected --></ul>
+          </div>
+
+          <div class="block">
+            <h2 class="block__title">موقعیت مکانی</h2>
+            <div class="map">
+              <img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?auto=format&fit=crop&w=1400&q=80" alt="نقشه منطقه" loading="lazy" width="1400" height="600">
+              <span class="map__pin" id="d-map-label">آنتالیا، ترکیه</span>
+            </div>
+            <p class="muted" style="font-size:14px;margin-top:14px">
+              نشانگر دقیق ملک پس از هماهنگی بازدید ارسال می‌شود؛ نزدیکی به ساحل، مدرسه و فرودگاه در جلسه بازدید بررسی می‌شود.
+            </p>
+          </div>
+
+          <div class="block">
+            <h2 class="block__title">نکات حقوقی</h2>
+            <div class="prose">
+              <p>
+                وضعیت سند، پروانه ساخت و عوارض شهرداری پیش از هر پرداختی به‌صورت رسمی استعلام می‌شود.
+                برای خریداران خارجی، فرایند انتقال سند (تاپو) با حضور کارشناس رسمی و مترجم هماهنگ می‌گردد.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- contact card -->
+        <aside class="contact-card" id="lead">
+          <div class="contact-card__who">
+            <img id="agent-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" alt="آرش کیانی" width="62" height="62">
+            <div>
+              <b id="agent-name">آرش کیانی</b>
+              <span>مشاور تخصصی املاک ساحلی</span>
+            </div>
+          </div>
+
+          <div class="contact-card__actions">
+            <a class="btn btn--dark btn--sm" href="tel:+905520000000" data-agent-phone>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              <span id="agent-phone">+90 552 000 00 00</span>
+            </a>
+            <a class="btn btn-whatsapp btn--sm" href="https://wa.me/905520000000" data-agent-whatsapp>گفت‌وگو در واتس‌اپ</a>
+          </div>
+
+          <form class="form-grid" data-lead>
+            <input type="hidden" id="lead-property" value="">
+            <div class="field">
+              <label for="p-name">نام شما</label>
+              <input id="p-name" type="text" placeholder="نام و نام خانوادگی" required>
+            </div>
+            <div class="field">
+              <label for="p-phone">شماره تماس</label>
+              <input id="p-phone" type="tel" placeholder="۰۹۱۲ ۰۰۰ ۰۰۰۰" required>
+            </div>
+            <div class="field field--select">
+              <label for="p-topic">درخواست</label>
+              <select id="p-topic">
+                <option>هماهنگی بازدید</option>
+                <option>دریافت اطلاعات تکمیلی</option>
+                <option>ویدیو تور ملک</option>
+                <option>استعلام قیمت نهایی</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-msg">توضیح (اختیاری)</label>
+              <textarea id="p-msg" placeholder="زمان موردنظر بازدید، سؤال یا بودجه…"></textarea>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">ارسال درخواست</button>
+            <div class="form-success">✓ درخواست ثبت شد؛ تا ۲۴ ساعت دیگر با شما تماس می‌گیرم.</div>
+            <p class="contact-card__note">پاسخ‌گویی زیر ۲۴ ساعت · مشاوره بدون تعهد</p>
+          </form>
+        </aside>
+      </div>
+
+      <!-- similar -->
+      <div class="section-head section-head--split" style="margin-top:64px">
+        <div>
+          <span class="eyebrow">پیشنهادهای مشابه</span>
+          <h2 class="section-title" style="font-size:clamp(24px,2.6vw,32px)">ملک‌هایی که <em>احتمالاً بپسندید</em></h2>
+        </div>
+        <a class="link-arrow" href="properties.html">همه املاک</a>
+      </div>
+
+      <div class="grid grid--3" id="similar-grid"><!-- injected --></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand__mark">K</span>
+          <span class="brand__text">
+            <span class="brand__name">کیانی املاک</span>
+            <span class="brand__tag">ANTALYA · ALANYA</span>
+          </span>
+        </a>
+        <p class="footer__about">ویترین دیجیتال معرفی املاک ساحلی ترکیه، ساخته‌شده بر پایه اعتماد، شفافیت قیمت و پشتیبانی شخصی.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="اینستاگرام">IG</a>
+          <a href="#" aria-label="تلگرام">TG</a>
+          <a href="#" aria-label="واتس‌اپ">WA</a>
+          <a href="#" aria-label="لینکدین">IN</a>
+        </div>
+      </div>
+      <div>
+        <h4>دسترسی سریع</h4>
+        <ul class="footer__links">
+          <li><a href="index.html">صفحه اصلی</a></li>
+          <li><a href="properties.html">همه املاک</a></li>
+          <li><a href="index.html#about">درباره من</a></li>
+          <li><a href="admin.html">پنل مدیریت</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>دسته‌بندی املاک</h4>
+        <ul class="footer__links">
+          <li><a href="properties.html?type=ویلا">ویلا</a></li>
+          <li><a href="properties.html?type=آپارتمان">آپارتمان</a></li>
+          <li><a href="properties.html?type=پنت‌هاوس">پنت‌هاوس</a></li>
+          <li><a href="properties.html?type=زمین">زمین</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>تماس</h4>
+        <ul class="footer__contact">
+          <li><span>⌖</span><span>چیلیوسلو، آنتالیا، ترکیه</span></li>
+          <li><span>✆</span><a href="tel:+905520000000">+90 552 000 00 00</a></li>
+          <li><span>✉</span><a href="mailto:info@kiani-estate.com">info@kiani-estate.com</a></li>
+          <li><span>◷</span><span>شنبه تا پنجشنبه، ۹ صبح تا ۷ عصر</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© ۱۴۰۴ کیانی املاک — تمام حقوق محفوظ است.</span>
+      <span>طراحی شده با تمرکز بر تجربه موبایل و سرعت بارگذاری</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
