@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پنل مدیریت | کیانی املاک</title>
+<meta name="description" content="پنل مدیریت محتوا و املاک: ثبت و ویرایش ملک، مدیریت درخواست‌های مشتریان و آمار سایت.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ff5a45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-body">
+
+<div class="admin">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">K</span>
+      <span class="brand__text">
+        <span class="brand__name">کیانی املاک</span>
+        <span class="brand__tag">پنل مدیریت</span>
+      </span>
+    </a>
+
+    <div class="sidebar__label">مدیریت</div>
+    <a class="is-active" href="admin.html"><span class="ico">▦</span><span class="txt">داشبورد</span></a>
+    <a href="admin.html"><span class="ico">⌂</span><span class="txt">املاک من</span></a>
+    <a href="admin.html"><span class="ico">✉</span><span class="txt">درخواست مشتریان</span></a>
+    <a href="admin.html"><span class="ico">✎</span><span class="txt">محتوای سایت</span></a>
+
+    <div class="sidebar__label">عمومی</div>
+    <a href="properties.html"><span class="ico">◎</span><span class="txt">مشاهده سایت</span></a>
+    <a href="index.html"><span class="ico">↩</span><span class="txt">خروج از پنل</span></a>
+
+    <div class="sidebar__foot">
+      <b>پلن نمایشی</b>
+      این پنل فقط طراحی شده است؛ داده‌ها ذخیره نمی‌شوند.
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="admin__main">
+    <div class="topbar">
+      <div>
+        <h1>داشبورد</h1>
+        <p>جمعه ۱ آبان ۱۴۰۴ · آخرین بروزرسانی ۱۰ دقیقه پیش</p>
+      </div>
+      <div class="topbar__side">
+        <div class="search">
+          <span class="search__icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <input type="search" placeholder="جست‌وجوی ملک یا مشتری…" style="height:44px;border-radius:999px">
+        </div>
+        <a class="btn btn--primary btn--sm" href="#new-property">+ افزودن ملک</a>
+        <div class="topbar__user">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80" alt="آرش کیانی" width="40" height="40">
+          <div><b>آرش کیانی</b><span>مدیر سایت</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- stats -->
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-card__ico">⌂</div>
+        <div><span>ملک‌های فعال</span><b>۹</b><small>+۲ این ماه</small></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__ico">✉</div>
+        <div><span>درخواست جدید</span><b>۲۴</b><small>+۸ نسبت به هفته قبل</small></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__ico">☏</div>
+        <div><span>شماره تماس ثبت‌شده</span><b>۱۷</b><small>+۵ این هفته</small></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__ico">◈</div>
+        <div><span>بازدید صفحه املاک</span><b>۲٬۴۸۰</b><small>+۱۲٪ این ماه</small></div>
+      </div>
+    </div>
+
+    <div class="admin__cols">
+      <div>
+        <!-- listings table -->
+        <section class="panel">
+          <div class="panel__head">
+            <div>
+              <h2>املاک منتشرشده</h2>
+              <p>برای ویرایش روی هر ردیف کلیک کنید</p>
+            </div>
+            <div class="chips">
+              <button class="chip is-active" type="button">همه</button>
+              <button class="chip" type="button">فروش</button>
+              <button class="chip" type="button">رزرو</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ملک</th>
+                  <th>نوع</th>
+                  <th>قیمت</th>
+                  <th>متراژ</th>
+                  <th>وضعیت</th>
+                  <th>عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="admin-table"><!-- injected --></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- new property form -->
+        <section class="panel" id="new-property">
+          <div class="panel__head">
+            <div>
+              <h2>افزودن / ویرایش ملک</h2>
+              <p>اطلاعات پس از ذخیره در صفحه املاک نمایش داده می‌شود</p>
+            </div>
+            <span class="tag tag--draft">پیش‌نویس</span>
+          </div>
+
+          <div class="panel__body">
+            <form id="admin-form" class="form-cols">
+              <div class="field field--full">
+                <label for="a-title">عنوان ملک</label>
+                <input id="a-title" type="text" placeholder="مثلاً ویلای استخردار با ویو دریا در کمر">
+              </div>
+
+              <div class="field field--select">
+                <label for="a-type">نوع ملک</label>
+                <select id="a-type">
+                  <option>ویلا</option>
+                  <option>آپارتمان</option>
+                  <option>پنت‌هاوس</option>
+                  <option>زمین</option>
+                </select>
+              </div>
+
+              <div class="field field--select">
+                <label for="a-area">محدوده</label>
+                <select id="a-area">
+                  <option>کمر</option>
+                  <option>آلانیا</option>
+                  <option>سیده</option>
+                  <option>چیرالی</option>
+                  <option>اُیم‌داغ</option>
+                  <option>بِلِک</option>
+                  <option>کاش</option>
+                  <option>ماناوگات</option>
+                  <option>مرکز شهر آنتالیا</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="a-price">قیمت (دلار)</label>
+                <input id="a-price" type="text" inputmode="numeric" placeholder="۴۵۰٬۰۰۰">
+              </div>
+
+              <div class="field">
+                <label for="a-size">متراژ (متر مربع)</label>
+                <input id="a-size" type="text" inputmode="numeric" placeholder="۱۸۰">
+              </div>
+
+              <div class="field">
+                <label for="a-rooms">تعداد اتاق خواب</label>
+                <input id="a-rooms" type="text" inputmode="numeric" placeholder="۳">
+              </div>
+
+              <div class="field field--select">
+                <label for="a-status">وضعیت</label>
+                <select id="a-status">
+                  <option>فروش</option>
+                  <option>رزرو شده</option>
+                  <option>فروخته شده</option>
+                  <option>پیش‌نویس</option>
+                </select>
+              </div>
+
+              <div class="field field--full">
+                <label for="a-desc">توضیحات ملک</label>
+                <textarea id="a-desc" placeholder="موقعیت، امتیازات، دسترسی‌ها و نکات حقوقی…"></textarea>
+              </div>
+
+              <div class="field field--full">
+                <label>گالری تصاویر</label>
+                <div class="upload">
+                  <b>تصاویر ملک را اینجا رها کنید</b>
+                  حداقل ۴ عکس افقی با کیفیت بالا · حداکثر ۱۰ فایل
+                </div>
+              </div>
+
+              <div class="field field--full">
+                <label for="a-seo">توضیح سئو (متا دیسکریپشن)</label>
+                <input id="a-seo" type="text" maxlength="160" placeholder="حداکثر ۱۶۰ کاراکتر برای نتایج گوگل">
+              </div>
+
+              <div style="grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+                <button class="btn btn--primary" type="submit">ذخیره و انتشار</button>
+                <button class="btn btn--ghost" type="button">ذخیره پیش‌نویس</button>
+                <button class="btn btn--ghost" type="button" style="margin-inline-start:auto">پیش‌نمایش صفحه</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <!-- right column -->
+      <div>
+        <section class="panel" style="margin-top:0">
+          <div class="panel__head">
+            <div>
+              <h2>درخواست‌های اخیر</h2>
+              <p>شماره تماس‌های دریافتی از سایت</p>
+            </div>
+            <a class="link-arrow" href="index.html#contact" style="font-size:13px">همه</a>
+          </div>
+          <div class="panel__body" id="leads-list"><!-- injected --></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__head">
+            <div>
+              <h2>وضعیت سئو و سرعت</h2>
+              <p>آخرین بررسی خودکار</p>
+            </div>
+          </div>
+          <div class="panel__body">
+            <div class="lead-item">
+              <div class="lead-item__av">✓</div>
+              <div><b>امتیاز سرعت موبایل</b><span>۹۴ از ۱۰۰ · LCP زیر ۲٫۵ ثانیه</span></div>
+              <span class="tag tag--live">خوب</span>
+            </div>
+            <div class="lead-item">
+              <div class="lead-item__av">✓</div>
+              <div><b>متا تگ‌های صفحات</b><span>عنوان و توضیح یکتا برای همه صفحات</span></div>
+              <span class="tag tag--live">کامل</span>
+            </div>
+            <div class="lead-item">
+              <div class="lead-item__av">!</div>
+              <div><b> alt تصاویر</b><span>۲ تصویر بدون متن جایگزین</span></div>
+              <span class="tag tag--hold">بررسی شود</span>
+            </div>
+            <div class="lead-item">
+              <div class="lead-item__av">✓</div>
+              <div><b>ساختار لینک داخلی</b><span>صفحات ملک به هم و به دسته‌ها لینک شده‌اند</span></div>
+              <span class="tag tag--live">خوب</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__head">
+            <div>
+              <h2>دسترسی سریع</h2>
+              <p>صفحات پرمخاطب سایت</p>
+            </div>
+          </div>
+          <div class="panel__body" style="display:grid;gap:10px">
+            <a class="btn btn--dark btn--sm btn--block" href="properties.html">مشاهده صفحه املاک</a>
+            <a class="btn btn--ghost btn--sm btn--block" href="index.html">مشاهده صفحه اصلی</a>
+            <a class="btn btn--ghost btn--sm btn--block" href="index.html#contact">فرم دریافت شماره تماس</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

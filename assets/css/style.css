@@ -1372,7 +1372,8 @@ h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; }
 }
 .topbar h1 { font-size: 20px; font-weight: 800; }
 .topbar p { font-size: 13px; color: var(--gray-400); }
-.topbar__side { display: flex; align-items: center; gap: 12px; }
+.topbar__side { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.topbar__side .search { flex: 1 1 220px; min-width: 0; }
 .topbar__user { display: flex; align-items: center; gap: 10px; }
 .topbar__user img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
 .topbar__user b { font-size: 14px; display: block; }
@@ -1433,6 +1434,9 @@ h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; }
   border-bottom: 1px solid var(--line);
   white-space: nowrap;
 }
+.table th:first-child,
+.table td:first-child { width: 44%; min-width: 260px; }
+
 .table td {
   padding: 15px 22px;
   border-bottom: 1px solid var(--line-2);
@@ -1626,6 +1630,9 @@ h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; }
   .sidebar .brand { padding: 0 8px 0 0; border-bottom: 0; border-inline-end: 1px solid rgba(255, 255, 255, 0.1); }
   .sidebar a { padding: 10px 12px; }
   .admin__main { padding: 20px 16px 50px; }
+  .topbar__side { width: 100%; }
+  .topbar__side .search { flex: 1 1 100%; }
+  .topbar__user div { display: none; }
   .quote { padding: 24px 20px; }
   .about__badge { inset-inline-start: 0; }
 }

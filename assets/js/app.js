@@ -267,6 +267,11 @@ function initListing() {
     })
   );
 
+  // deep links: properties.html?type=ویلا  /  ?area=کمر
+  const params = new URLSearchParams(location.search);
+  if (params.get("type") && els.type) els.type.value = params.get("type");
+  if (params.get("area") && els.area) els.area.value = params.get("area");
+
   els.reset?.addEventListener("click", () => {
     ["q", "type", "area", "price", "size"].forEach((k) => {
       if (els[k]) els[k].value = "";
