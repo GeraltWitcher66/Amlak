@@ -1,0 +1,24 @@
+# ---------- سیستم‌عامل و ادیتور ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ---------- متغیرهای محیطی و رمزها ----------
+.env
+.env.*
+!.env.example
+
+# ---------- دیتابیس (داده محلی، هرگز کامیت نمی‌شود) ----------
+storage/*.sqlite
+storage/*.sqlite-wal
+storage/*.sqlite-shm
+*.sqlite3
+*.db
+
+# ---------- خروجی‌های تولیدشده ----------
+docs/*.docx
+node_modules/
+npm-debug.log*

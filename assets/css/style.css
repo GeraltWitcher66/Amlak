@@ -149,6 +149,9 @@ h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; }
 .muted { color: var(--gray-500); }
 .tnum { font-variant-numeric: tabular-nums; }
 
+/* شماره‌ها و ارقام در متن راست‌به‌چپ: ترتیب لاتین حفظ شود */
+.num { direction: ltr; unicode-bidi: isolate; }
+
 /* ---------- Buttons ---------- */
 .btn {
   --btn-bg: var(--ink);
