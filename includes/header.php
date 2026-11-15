@@ -3,7 +3,7 @@
  * هدر مشترک صفحات عمومی — هر صفحه اول init.php و بعد این فایل را require می‌کند.
  * متغیرهای لازم: $pageTitle (الزامی)
  * متغیرهای اختیاری: $metaDesc، $activeNav ('home'|'properties'|'admin')،
- *                   $ctaHref، $ctaText، $ogImage
+ *                   $ctaHref، $ctaText، $ogImage، $canonical، $robots، $jsonLd
  */
 $agent    ??= agent();
 $pageTitle ??= 'کیانی املاک';
@@ -11,6 +11,41 @@ $metaDesc  ??= '';
 $activeNav ??= '';
 $ctaHref   ??= 'index.php#contact';
 $ctaText   ??= 'درخواست مشاوره';
+$ogType    ??= 'website';
+$robots    ??= '';
+$canonical ??= '';
+$jsonLd    ??= [];
+
+$ogImage   ??= 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80';
+$ogImage   = abs_url((string) $ogImage);
+$canonical = $canonical !== ''
+    ? $canonical
+    : site_url(strtok((string) ($_SERVER['REQUEST_URI'] ?? '/'), '?'));
+
+/* داده ساختاریافته: معرفی مشاور در همه صفحات + موارد اختصاصی هر صفحه */
+$siteLd = [
+    '@context' => 'https://schema.org',
+    '@graph'   => array_merge([
+        [
+            '@type'       => 'RealEstateAgent',
+            '@id'         => site_url('index.php') . '#agent',
+            'name'        => $agent['brand'],
+            'description' => $agent['name'] . ' — ' . $agent['role'] . ' در ' . $agent['regions'],
+            'url'         => site_url('index.php'),
+            'telephone'   => $agent['phoneHref'],
+            'email'       => $agent['email'],
+            'image'       => abs_url((string) $agent['photo']),
+            'priceRange'  => '$$$',
+            'areaServed'  => $agent['regions'],
+            'address'     => [
+                '@type'           => 'PostalAddress',
+                'streetAddress'   => $agent['address'],
+                'addressLocality' => 'Antalya',
+                'addressCountry'  => 'TR',
+            ],
+        ],
+    ], array_values($jsonLd)),
+];
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -20,12 +55,26 @@ $ctaText   ??= 'درخواست مشاوره';
 <title><?= e($pageTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <meta name="theme-color" content="#ff5a45">
-<?php if (!empty($ogImage)) { ?>
-<meta property="og:type" content="website">
+<link rel="canonical" href="<?= e($canonical) ?>">
+<?php if ($robots !== '') { ?>
+<meta name="robots" content="<?= e($robots) ?>">
+<?php } ?>
+<meta property="og:type" content="<?= e($ogType) ?>">
+<meta property="og:site_name" content="کیانی املاک">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:url" content="<?= e($canonical) ?>">
 <meta property="og:title" content="<?= e($pageTitle) ?>">
 <meta property="og:description" content="<?= e($metaDesc) ?>">
+<?php if ($ogImage !== '') { ?>
 <meta property="og:image" content="<?= e($ogImage) ?>">
 <?php } ?>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= e($pageTitle) ?>">
+<meta name="twitter:description" content="<?= e($metaDesc) ?>">
+<?php if ($ogImage !== '') { ?>
+<meta name="twitter:image" content="<?= e($ogImage) ?>">
+<?php } ?>
+<script type="application/ld+json"><?= json_encode($siteLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">

@@ -18,6 +18,7 @@ if ($p === null) {
     http_response_code(404);
     $pageTitle = 'ملک یافت نشد | کیانی املاک';
     $metaDesc  = 'ملک موردنظر یافت نشد.';
+    $robots    = 'noindex,follow';
     require __DIR__ . '/includes/header.php';
     ?>
   <section class="page-hero" style="padding-bottom:44px">
@@ -49,6 +50,48 @@ $paragraphs = preg_split('/\n{2,}/u', $p['description']) ?: [];
 $pageTitle = $p['title'] . ' | کیانی املاک';
 $metaDesc  = $p['seo_description'] !== '' ? $p['seo_description'] : 'جزئیات ' . $p['type'] . ' در ' . $p['area'] . '، ' . $p['city'] . '؛ قیمت، مشخصات، امکانات و درخواست بازدید.';
 $activeNav = 'properties';
+
+/* ---------- سئو و داده ساختاریافته ملک ---------- */
+$canonical = site_url('property.php?id=' . rawurlencode($p['slug']));
+$ogImage   = abs_url(img_w($images[0], 1200));
+$ogType    = 'product';
+
+$jsonLd = [
+    array_filter([
+        '@type'         => 'RealEstateListing',
+        'name'          => $p['title'],
+        'description'   => $metaDesc,
+        'url'           => $canonical,
+        'image'         => array_map(static fn (string $im): string => abs_url(img_w($im, 1200)), array_slice($images, 0, 6)),
+        'numberOfRooms' => $p['rooms'] ?: null,
+        'floorSize'     => [
+            '@type'    => 'QuantitativeValue',
+            'value'    => $p['size'],
+            'unitCode' => 'MTK',
+        ],
+        'address'       => [
+            '@type'           => 'PostalAddress',
+            'addressLocality' => $p['area'] . '، ' . $p['city'],
+            'addressRegion'   => $p['city'],
+            'addressCountry'  => 'TR',
+        ],
+        'offers'        => [
+            '@type'         => 'Offer',
+            'price'         => $p['price'],
+            'priceCurrency' => 'USD',
+            'availability'  => $p['status'] === 'فروش' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+            'url'           => $canonical,
+        ],
+    ], static fn ($v): bool => $v !== null),
+    [
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'خانه', 'item' => site_url('index.php')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'املاک', 'item' => site_url('properties.php')],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => $p['title']],
+        ],
+    ],
+];
 
 require __DIR__ . '/includes/header.php';
 ?>
@@ -126,6 +169,38 @@ require __DIR__ . '/includes/header.php';
             <ul class="features" id="d-features">
               <?php foreach ($p['features'] as $feat) { ?><li><?= e($feat) ?></li><?php } ?>
             </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="block__title">محاسبه بازده سرمایه‌گذاری</h2>
+            <p class="muted" style="font-size:14px;margin:0">
+              با اجاره تقریبی همین محدوده، درآمد سالانه و بازده خالص سرمایه را ببینید.
+            </p>
+
+            <div class="calc" id="roi-calc" data-price="<?= (int) $p['price'] ?>">
+              <div class="calc__grid">
+                <div class="field">
+                  <label for="roi-rent">اجاره ماهانه (دلار)</label>
+                  <input id="roi-rent" type="text" inputmode="numeric" placeholder="۱٬۲۰۰" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="roi-cost">هزینه سالانه (دلار)</label>
+                  <input id="roi-cost" type="text" inputmode="numeric" placeholder="۴٬۰۰۰" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="roi-vacancy">خالی بودن سالانه (٪)</label>
+                  <input id="roi-vacancy" type="text" inputmode="numeric" value="۱" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="calc__out" aria-live="polite">
+                <div><span>درآمد ناخالص سالانه</span><b id="roi-gross" dir="ltr">—</b></div>
+                <div><span>درآمد خالص سالانه</span><b id="roi-net" dir="ltr">—</b></div>
+                <div><span>بازده خالص</span><b id="roi-yield" class="is-strong" dir="ltr">—</b></div>
+              </div>
+
+              <p class="calc__note">تخمین تقریبی بر اساس ورودی شماست؛ مالیات، هزینه انتقال سند و افزایش قیمت ملک در آن لحاظ نشده است.</p>
+            </div>
           </div>
 
           <div class="block">

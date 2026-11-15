@@ -1,0 +1,13 @@
+# کیانی املاک — قوانین خزش برای موتورهای جست‌وجو
+
+User-agent: *
+Allow: /
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /leads.php
+Disallow: /seed.php
+Disallow: /storage/
+Disallow: /includes/
+Disallow: /tests/
+Disallow: /docs/

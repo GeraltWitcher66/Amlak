@@ -33,6 +33,12 @@ $metaDesc  = 'جست‌وجو و فیلتر املاک بر اساس نوع مل
 $activeNav = 'properties';
 $ctaHref   = 'index.php#contact';
 
+// صفحه فیلترشده تکراری است: canonical به فهرست اصلی و noindex برای نتایج فیلتر
+$hasFilters = $f['q'] !== '' || $f['type'] !== '' || $f['area'] !== ''
+    || $f['price'] !== '' || $f['size'] !== '' || $f['sort'] !== '';
+$canonical = site_url('properties.php');
+$robots    = $hasFilters ? 'noindex,follow' : '';
+
 require __DIR__ . '/includes/header.php';
 ?>
 

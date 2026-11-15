@@ -102,6 +102,29 @@ function img_w(string $url, int $w): string
     return $out;
 }
 
+/** آدرس کامل سایت بر اساس همین درخواست (برای canonical، OG و sitemap) */
+function site_origin(): string
+{
+    $https = (($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? '') !== 'off')
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+    return ($https ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost');
+}
+
+/** ساخت آدرس مطلق از یک مسیر داخلی */
+function site_url(string $path = '/'): string
+{
+    return rtrim(site_origin(), '/') . '/' . ltrim($path, '/');
+}
+
+/** مسیر نسبی را به آدرس مطلق تبدیل می‌کند؛ آدرس‌های خارجی دست‌نخورده می‌مانند */
+function abs_url(string $url): string
+{
+    if ($url === '') {
+        return '';
+    }
+    return preg_match('#^https?://#i', $url) ? $url : site_url($url);
+}
+
 function redirect(string $to): never
 {
     // فقط مسیرهای داخلی سایت
@@ -424,7 +447,7 @@ function property_card(array $p): string
         . '<span class="pill pill--coral">' . e($p['type']) . '</span>'
         . (!empty($p['badge']) ? '<span class="pill">' . e($p['badge']) . '</span>' : '')
         . '</div>'
-        . '<button class="prop-card__fav" type="button" aria-label="ذخیره ملک">' . ICO_HEART . '</button>'
+        . '<button class="prop-card__fav" type="button" aria-label="ذخیره ملک" aria-pressed="false" data-slug="' . e($p['slug']) . '">' . ICO_HEART . '</button>'
         . '</div>'
         . '<div class="prop-card__body">'
         . '<div class="prop-card__loc">' . ICO_PIN . ' ' . e($p['area']) . '، ' . e($p['city']) . '</div>'

@@ -96,13 +96,46 @@ function initCounters() {
   els.forEach((el) => io.observe(el));
 }
 
-/* ---------- دکمه علاقه‌مندی روی کارت‌ها ---------- */
+/* ---------- علاقه‌مندی‌ها: ذخیره در مرورگر + همگام‌سازی همه کارت‌های همان ملک ---------- */
+const FAV_KEY = "kiani:favs";
+
+function readFavs() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+    return Array.isArray(raw) ? new Set(raw.filter((s) => typeof s === "string" && s !== "")) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function writeFavs(set) {
+  try {
+    localStorage.setItem(FAV_KEY, JSON.stringify([...set]));
+  } catch {
+    /* حالت مرور خصوصی: تغییر فقط در همین صفحه می‌ماند */
+  }
+}
+
+function paintFav(btn, on) {
+  btn.classList.toggle("is-on", on);
+  btn.setAttribute("aria-pressed", on ? "true" : "false");
+}
+
 function bindFavs(scope = document) {
+  const favs = readFavs();
   $$(".prop-card__fav", scope).forEach((btn) => {
+    const slug = btn.dataset.slug || "";
+    if (!slug) return;
+    paintFav(btn, favs.has(slug));
+
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      btn.classList.toggle("is-on");
-      toast(btn.classList.contains("is-on") ? "ملک به علاقه‌مندی‌ها اضافه شد" : "از علاقه‌مندی‌ها حذف شد");
+      const on = !favs.has(slug);
+      if (on) favs.add(slug);
+      else favs.delete(slug);
+      writeFavs(favs);
+      $$(".prop-card__fav").filter((b) => b.dataset.slug === slug).forEach((b) => paintFav(b, on));
+      toast(on ? "ملک به علاقه‌مندی‌ها اضافه شد" : "از علاقه‌مندی‌ها حذف شد");
     });
   });
 }
@@ -160,6 +193,54 @@ function initAutoSubmit() {
   );
 }
 
+/* ---------- ماشین‌حساب بازده سرمایه‌گذاری ---------- */
+function initRoiCalc() {
+  const root = $("#roi-calc");
+  if (!root) return;
+  const price = Number(root.dataset.price || 0);
+  if (!price) return;
+
+  const rent = $("#roi-rent");
+  const cost = $("#roi-cost");
+  const vacancy = $("#roi-vacancy");
+  const grossEl = $("#roi-gross");
+  const netEl = $("#roi-net");
+  const yieldEl = $("#roi-yield");
+  if (!rent || !cost || !vacancy || !grossEl || !netEl || !yieldEl) return;
+
+  // ورودی ممکن است با ارقام فارسی/عربی یا جداکننده هزارگان نوشته شود
+  const toNumber = (el) => {
+    const normalized = String(el.value)
+      .replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)))
+      .replace(/[٠-٩]/g, (d) => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)))
+      .replace(/[^\d.]/g, "");
+    const n = Number(normalized);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  const money = (v) => "$" + Math.round(v).toLocaleString("fa-IR");
+  const percent = (v) => v.toLocaleString("fa-IR", { maximumFractionDigits: 1 }) + "٪";
+
+  const paint = () => {
+    const monthlyRent = toNumber(rent);
+    if (monthlyRent <= 0 && toNumber(cost) <= 0) {
+      grossEl.textContent = "—";
+      netEl.textContent = "—";
+      yieldEl.textContent = "—";
+      return;
+    }
+    const emptyRate = Math.min(Math.max(toNumber(vacancy), 0), 100);
+    const gross = monthlyRent * 12 * (1 - emptyRate / 100);
+    const net = gross - toNumber(cost);
+    grossEl.textContent = money(gross);
+    netEl.textContent = money(net);
+    yieldEl.textContent = net > 0 ? percent((net / price) * 100) : percent(0);
+  };
+
+  [rent, cost, vacancy].forEach((el) => el.addEventListener("input", paint));
+  paint();
+}
+
 /* ---------- boot ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   initHeader();
@@ -170,4 +251,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindFavs(document);
   initReveal();
   initCounters();
+  initRoiCalc();
 });
