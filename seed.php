@@ -10,7 +10,7 @@ declare(strict_types=1);
  *   php seed.php --password=X → تغییر رمز عبور مدیر هنگام ساخت حساب
  */
 
-require __DIR__ . '/includes/init.php';
+require_once __DIR__ . '/includes/init.php';
 
 $fresh  = in_array('--fresh', $argv ?? [], true);
 $dbPath = DB_PATH;

@@ -440,7 +440,20 @@ function property_card(array $p): string
     $href = 'property.php?id=' . rawurlencode($p['slug']);
     $img  = img_w($p['image'] ?? '', 900);
 
-    return '<article class="prop-card reveal">'
+    // ویژگی‌های داده‌ای برای فیلتر سمت مرورگر در نسخه استاتیک (GitHub Pages)
+    $searchText = mb_strtolower(trim(
+        $p['title'] . ' ' . $p['area'] . ' ' . $p['city'] . ' ' . $p['type'] . ' '
+        . mb_substr((string) ($p['description'] ?? ''), 0, 240)
+    ), 'UTF-8');
+
+    return '<article class="prop-card reveal"'
+        . ' data-slug="' . e($p['slug']) . '"'
+        . ' data-type="' . e($p['type']) . '"'
+        . ' data-area="' . e($p['area']) . '"'
+        . ' data-price="' . (int) $p['price'] . '"'
+        . ' data-size="' . (int) $p['size'] . '"'
+        . ' data-search="' . e($searchText) . '"'
+        . '>'
         . '<div class="prop-card__media">'
         . '<img src="' . e($img) . '" alt="' . e($p['title']) . '" loading="lazy" width="900" height="675">'
         . '<div class="prop-card__badges">'

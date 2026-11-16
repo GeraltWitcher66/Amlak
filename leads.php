@@ -6,7 +6,7 @@ declare(strict_types=1);
  * فیلدها: name, phone, topic, budget, message, property, source, back, anchor
  */
 
-require __DIR__ . '/includes/init.php';
+require_once __DIR__ . '/includes/init.php';
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     redirect('/index.php');

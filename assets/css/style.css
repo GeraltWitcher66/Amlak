@@ -152,6 +152,9 @@ h1, h2, h3, h4 { line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; }
 /* شماره‌ها و ارقام در متن راست‌به‌چپ: ترتیب لاتین حفظ شود */
 .num { direction: ltr; unicode-bidi: isolate; }
 
+/* پنهان‌سازی کارت‌ها/بخش‌ها با صفت hidden (نسخه استاتیک) */
+[hidden] { display: none !important; }
+
 /* ---------- Buttons ---------- */
 .btn {
   --btn-bg: var(--ink);

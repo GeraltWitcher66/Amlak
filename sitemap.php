@@ -8,7 +8,7 @@ declare(strict_types=1);
  * به‌صورت خودکار معرفی شوند. صفحات پیش‌نویس و فروخته‌شده در آن نمی‌آیند.
  */
 
-require __DIR__ . '/includes/init.php';
+require_once __DIR__ . '/includes/init.php';
 
 header('Content-Type: application/xml; charset=utf-8');
 

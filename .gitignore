@@ -20,5 +20,6 @@ storage/*.sqlite-shm
 
 # ---------- خروجی‌های تولیدشده ----------
 docs/*.docx
+_site/
 node_modules/
 npm-debug.log*

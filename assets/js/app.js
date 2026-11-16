@@ -168,6 +168,8 @@ function initGallery() {
 function initFilters() {
   const form = $("#filter-form");
   if (!form) return;
+  // در نسخه استاتیک (GitHub Pages) فیلتر در همان صفحه و بدون سرور انجام می‌شود
+  if (form.dataset.static !== undefined) return;
 
   // تغییر هر فهرست = اعمال فیلتر (سرور نتایج را دوباره می‌سازد)
   $$("select", form).forEach((sel) =>

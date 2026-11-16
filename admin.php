@@ -6,7 +6,7 @@ declare(strict_types=1);
  * نیازمند ورود (login.php) و توکن CSRF برای همه عملیات نوشتن.
  */
 
-require __DIR__ . '/includes/init.php';
+require_once __DIR__ . '/includes/init.php';
 
 $admin = require_admin();
 
